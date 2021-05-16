@@ -1,5 +1,5 @@
 <template>
-  <div class="m-4" :class="[lancamento.tipo == 'DESPESA' ? 'despesa' : 'receita', 'lancamento']">
+  <div class="m-4 is-dark" :class="[lancamento.tipo == 'DESPESA' ? 'despesa' : 'receita', 'lancamento']">
       <h3>
           {{lancamento.descricao}}
           <i class="fas fa-times"></i> 
@@ -23,16 +23,15 @@ export default {
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  background: #f9f9f9;
 }
 
 .lancamento.receita {
   border-left: 5px solid green;
-  background: #d6ffd9;
 }
 
 .lancamento.despesa {
   border-left: 5px solid red;
-  background: #fff3f3;
 }
 
 .lancamento h3 {

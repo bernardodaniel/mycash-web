@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <span class="navbar-item">
         <strong>MY CASH</strong>
@@ -27,7 +27,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-light"> Log in </a>
+            <router-link to="/login" class="button is-light"> Log in </router-link>
             <a class="button is-danger"> Log out </a>
           </div>
         </div>

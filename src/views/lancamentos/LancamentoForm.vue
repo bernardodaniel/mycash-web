@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="field mb-5 mt-5">
       <div class="control">
         <label class="radio">
           <input type="radio" name="tipo" checked>

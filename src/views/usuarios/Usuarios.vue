@@ -1,10 +1,20 @@
 <template>
-  <h1>Usuários</h1>
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-8-widescreen">
+          <UsuarioForm />
+          <UsuariosTable />
+        </div>
+      </div>
 </template>
 
 <script>
-export default {
+import UsuariosTable from './UsuariosTable'
+import UsuarioForm from './UsuarioForm'
 
+export default {
+  components: {
+    UsuariosTable, UsuarioForm
+  }
 }
 </script>
 
