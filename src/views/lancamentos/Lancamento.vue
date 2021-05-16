@@ -1,5 +1,5 @@
 <template>
-  <div :class="[lancamento.tipo == 'DESPESA' ? 'despesa' : 'receita', 'lancamento']">
+  <div class="m-4" :class="[lancamento.tipo == 'DESPESA' ? 'despesa' : 'receita', 'lancamento']">
       <h3>
           {{lancamento.descricao}}
           <i class="fas fa-times"></i> 
