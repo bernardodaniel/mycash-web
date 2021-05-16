@@ -32,4 +32,14 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('mycash_token')
+
+  if (!token && to.matched.some(record => record.name != 'Login')) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
+})
+
 export default router

@@ -28,7 +28,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <router-link to="/login" class="button is-light"> Log in </router-link>
-            <a class="button is-danger"> Log out </a>
+            <button class="button is-danger" @click="onLogout">Logout</button>
           </div>
         </div>
       </div>
@@ -37,7 +37,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    onLogout() {
+      localStorage.removeItem('mycash_token')
+      this.$router.push('/login')
+    }
+  }
+};
 </script>
 
 <style scoped>
