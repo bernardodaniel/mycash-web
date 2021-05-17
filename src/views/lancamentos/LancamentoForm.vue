@@ -4,21 +4,21 @@
     <div class="field">
       <label class="label">Descrição</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Descrição">
+        <input v-model="lancamento.descricao" class="input" type="text" placeholder="Descrição">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Valor R$</label>
       <div class="control">
-        <input class="input" type="number" step="0.01" placeholder="Valor R$">
+        <input v-model="lancamento.valor" class="input" type="number" step="0.01" placeholder="Valor R$">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Data</label>
       <div class="control">
-        <input class="input" type="date" placeholder="Data">
+        <input v-model="lancamento.data" class="input" type="date" placeholder="Data">
       </div>
     </div>
 
@@ -40,7 +40,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+    computed: {
+      ...mapGetters(['lancamento'])
+    },
 }
 </script>
 

@@ -1,26 +1,13 @@
 import LancamentoService from '../../services/lancamentoService'
 
 const state = {
-    lancamentos: [
-        {
-          "id": 3,
-          "descricao": "Livro",
-          "data": "2021-05-12",
-          "valor": 29.9,
-          "tipo": "DESPESA"
-        },
-        {
-          "id": 4,
-          "descricao": "Venda Liquidificador",
-          "data": "2021-05-12",
-          "valor": 50.00,
-          "tipo": "RECEITA"
-        },
-      ]
+    lancamentos: [ ],
+    lancamento: {}
 }
 
 const getters = {
-    todosLancamentos: (state) => state.lancamentos
+    todosLancamentos: (state) => state.lancamentos,
+    lancamento: (state) => state.lancamento
 }
 
 const actions = {
@@ -28,11 +15,18 @@ const actions = {
         const res = await LancamentoService.getTodos()
         commit('setLancamentos', res.data)
     },
+    selecionaLancamento({ commit }, id) {
+        commit('setLancamentoPorId', id)
+    },
 
 }
 
 const mutations = {
-    setLancamentos: (state, lancamentos) => state.lancamentos = lancamentos
+    setLancamentos: (state, lancamentos) => state.lancamentos = lancamentos,
+    setLancamentoPorId: (state, id) => {
+        console.log(id);
+        state.lancamento = state.lancamentos.filter(l => l.id === id)[0]
+    },
 }
 
 export default {
