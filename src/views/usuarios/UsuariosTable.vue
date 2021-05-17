@@ -7,8 +7,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>admin@gmail.com</th>
+    <tr v-for="usuario in todosUsuarios" :key="usuario.id">
+      <td>{{usuario.email}}</td>
       <td>
           <button class="button is-small is-light">
               <i class="fas fa-pen"></i>
@@ -20,7 +20,16 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
+
+  computed: mapGetters(['todosUsuarios']),
+  methods: {
+    ...mapActions(['buscarUsuarios'])
+  },
+  mounted() {
+    this.buscarUsuarios()
+  }
 
 }
 </script>

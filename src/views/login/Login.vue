@@ -36,8 +36,13 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  inject: {
+    http: {
+      from: 'http'
+    }
+  },
   data() {
     return {
       email: '',
@@ -55,7 +60,7 @@ export default {
       bodyData.append('password', this.senha)
 
       try {
-        const res = await this.$http.post('/oauth/token', bodyData, {
+        const res = await this.http.post('/oauth/token', bodyData, {
           auth: {
             username: 'mycash-web',
             password: 'SENHAFORTE'
@@ -66,20 +71,18 @@ export default {
         console.log(res.data.access_token);
         console.log(JSON.parse(atob(res.data.access_token.split('.')[1])));
 
-          
-          
         if (res.status === 200) {
           this.$router.push('/')
           
-          this.$http.defaults.headers.common['Authorization'] = `${res.data.token_type} ${res.data.access_token}`
-          localStorage.setItem('mycash_token', JSON.stringify(res.data.access_token))
+          // http.defaults.headers.common['Authorization'] = `${res.data.token_type} ${res.data.access_token}`
+          localStorage.setItem('mycash_token', res.data.access_token)
         } 
         
       } catch(err) {
         console.log(err);
 
         this.loginError = true
-        delete this.$http.defaults.headers.common['Authorization']
+        // delete this.$http.defaults.headers.common['Authorization']
         localStorage.removeItem('mycash_token')
       } 
 
