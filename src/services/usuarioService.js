@@ -14,6 +14,12 @@ class UsuarioService {
         return res
     }
 
+    criarUsuario(bodyData) {
+        const http = createHttp()
+        const res = http.post('/api/usuario/', bodyData)
+        return res
+    }
+
 }
 
 export default new UsuarioService();

@@ -1,5 +1,12 @@
 <template>
+
   <form  @submit="onSubmit" class="m-4">
+
+    <div class="buttons is-right">
+      <button @click.prevent="onNovo" class="button is-primary is-rounded">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
 
     <div class="field">
       <label class="label">E-mail</label>
@@ -24,10 +31,16 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: mapGetters(['usuario']),
   methods: {
-    ...mapActions(['resetarSenha']),
+    ...mapActions(['resetarSenha', 'novoUsuario', 'criarUsuario']),
     onSubmit(e) {
       e.preventDefault()
-      this.resetarSenha(this.usuario)
+      if (this.usuario.id)
+        this.resetarSenha(this.usuario)
+      else
+        this.criarUsuario(this.usuario)
+    },
+    onNovo() {
+      this.novoUsuario()
     }
   }
 }
