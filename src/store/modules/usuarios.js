@@ -1,4 +1,4 @@
-import { inject } from 'vue'
+import createHttp from '../../services/axiosConfig'
 
 const state = {
     usuarios: [ ]
@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
     async buscarUsuarios({ commit }) {
-        const http = inject('http')
+        const http = createHttp()
         const res = await http.get('/api/usuario')
 
         commit('setUsuarios', res.data)

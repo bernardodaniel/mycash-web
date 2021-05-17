@@ -36,13 +36,9 @@
 </template>
 
 <script>
+import createHttp from '@/services/axiosConfig'
 
 export default {
-  inject: {
-    http: {
-      from: 'http'
-    }
-  },
   data() {
     return {
       email: '',
@@ -60,7 +56,8 @@ export default {
       bodyData.append('password', this.senha)
 
       try {
-        const res = await this.http.post('/oauth/token', bodyData, {
+        const http = createHttp()
+        const res = await http.post('/oauth/token', bodyData, {
           auth: {
             username: 'mycash-web',
             password: 'SENHAFORTE'
