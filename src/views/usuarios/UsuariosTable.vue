@@ -10,7 +10,7 @@
     <tr v-for="usuario in todosUsuarios" :key="usuario.id">
       <td>{{usuario.email}}</td>
       <td>
-          <button class="button is-small is-light">
+          <button @click="onEdit(usuario.id)" class="button is-small is-light">
               <i class="fas fa-pen"></i>
           </button>
       </td>
@@ -25,7 +25,10 @@ export default {
 
   computed: mapGetters(['todosUsuarios']),
   methods: {
-    ...mapActions(['buscarUsuarios'])
+    ...mapActions(['buscarUsuarios', 'selecionaUsuario']),
+    onEdit(id) {
+      this.selecionaUsuario(id)
+    }
   },
   mounted() {
     this.buscarUsuarios()

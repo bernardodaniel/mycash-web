@@ -36,13 +36,9 @@
 </template>
 
 <script>
+import createHttp from '@/services/axiosConfig'
 
 export default {
-  inject: {
-    http: {
-      from: 'http'
-    }
-  },
   data() {
     return {
       email: '',
@@ -60,7 +56,8 @@ export default {
       bodyData.append('password', this.senha)
 
       try {
-        const res = await this.http.post('/oauth/token', bodyData, {
+        const http = createHttp()
+        const res = await http.post('/oauth/token', bodyData, {
           auth: {
             username: 'mycash-web',
             password: 'SENHAFORTE'
@@ -74,7 +71,6 @@ export default {
         if (res.status === 200) {
           this.$router.push('/')
           
-          // http.defaults.headers.common['Authorization'] = `${res.data.token_type} ${res.data.access_token}`
           localStorage.setItem('mycash_token', res.data.access_token)
         } 
         
@@ -82,11 +78,8 @@ export default {
         console.log(err);
 
         this.loginError = true
-        // delete this.$http.defaults.headers.common['Authorization']
         localStorage.removeItem('mycash_token')
       } 
-
-      
     }
   }
 
