@@ -2,12 +2,14 @@ import LancamentoService from '../../services/lancamentoService'
 
 const state = {
     lancamentos: [ ],
-    lancamento: {}
+    lancamento: {},
+    mensagemErro: {}
 }
 
 const getters = {
     todosLancamentos: (state) => state.lancamentos,
-    lancamento: (state) => state.lancamento
+    lancamento: (state) => state.lancamento,
+    mensagemErro: (state) => state.mensagemErro
 }
 
 const actions = {
@@ -22,8 +24,13 @@ const actions = {
         commit('setLancamento', {})
     },
     async criarLancamento({ commit }, lancamento) {
-        const res = await LancamentoService.criarLancamento(lancamento)
-        commit('addLancamento', res.data)
+        try {
+            const res = await LancamentoService.criarLancamento(lancamento)
+            commit('addLancamento', res.data)
+        } catch (e) {
+            commit('setMensagemErro', e)
+            console.log(e)
+        }
     },
     async alterarLancamento({ commit }, lancamento) {
         const res = await LancamentoService.alterarLancamento(lancamento)
@@ -52,7 +59,8 @@ const mutations = {
             state.lancamentos.splice(index, 1, lancamento)
         }
     },
-    removeLancamento: (state, id) => state.lancamentos = state.lancamentos.filter(l => l.id !== id)
+    removeLancamento: (state, id) => state.lancamentos = state.lancamentos.filter(l => l.id !== id),
+    setMensagemErro: (state, mensagem) => state.mensagemErro = mensagem
 }
 
 export default {

@@ -1,4 +1,12 @@
 <template>
+  <div class="notification is-danger" v-show="temErro">
+    <button class="delete"></button>
+    {{ mensagemErro.mensagem }}
+    <ul>
+      <li v-for="e in mensagemErro.subErros" :key="e">{{e}}</li>
+    </ul>
+  </div>
+
   <form @submit.prevent="onSubmit" class="m-4">
 
     <div class="buttons is-right">
@@ -49,7 +57,10 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     computed: {
-      ...mapGetters(['lancamento'])
+      ...mapGetters(['lancamento', 'mensagemErro']),
+      temErro() {
+        return this.mensagemErro.mensagem ? true : false
+      }
     },
     methods: {
       ...mapActions(['novoLancamento', 'criarLancamento', 'alterarLancamento']),
