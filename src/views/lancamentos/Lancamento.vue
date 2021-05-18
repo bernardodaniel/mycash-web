@@ -1,8 +1,13 @@
 <template>
   <div class="m-4 is-dark" :class="[lancamento.tipo == 'DESPESA' ? 'despesa' : 'receita', 'lancamento']">
       <h3>
-          <a class="descricao" @click="selecionarLancamento(lancamento.id)">{{lancamento.descricao}}</a>
-          <i class="fas fa-times"></i> 
+          <a class="has-text-dark" 
+            @click="selecionarLancamento(lancamento.id)">
+            <strong>{{lancamento.descricao}}</strong>
+          </a>
+          <a class="icon icon-text" @click="excluirLancamento(lancamento.id)">
+            <i class="fas fa-times"></i> 
+          </a>
         </h3>
       <p>{{ $filters.date(lancamento.data) }} - {{ $filters.currency(lancamento.valor) }}</p>
   </div>
@@ -15,7 +20,7 @@ export default {
         lancamento: Object
     },
     methods: {
-      ...mapActions(['selecionaLancamento']),
+      ...mapActions(['selecionaLancamento', 'excluirLancamento']),
       selecionarLancamento(id) {
         this.selecionaLancamento(id);
       }
@@ -44,10 +49,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.lancamento.descricao {
-  cursor: pointer;
 }
 
 p {
