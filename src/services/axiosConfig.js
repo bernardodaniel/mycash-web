@@ -28,6 +28,9 @@ export default function createHttp() {
             if (res.status === 401) {
                 router.push('/login')
             }
+            if (res.status === 403) {
+                router.push('/')
+            }
             if (res.data) {
                 return Promise.reject(res.data);
             }
